@@ -51,13 +51,13 @@ int main(int argc, char* argv[])
       std::stoi(program.get<std::string>("time_limit_sec"));
   const auto scen_name = program.get<std::string>("scen");
   const auto seed = std::stoi(program.get<std::string>("seed"));
-  auto MT = std::mt19937(seed);
+  auto TT = std::mt19937(seed);
   const auto map_name = program.get<std::string>("map");
   const auto output_name = program.get<std::string>("output");
   const auto log_short = program.get<bool>("log_short");
   const auto N = std::stoi(program.get<std::string>("num"));
   const auto ins = scen_name.size() > 0 ? Instance(scen_name, map_name, N)
-                                        : Instance(map_name, &MT, N);
+                                        : Instance(map_name, &TT, N);
   const auto objective =
       static_cast<Objective>(std::stoi(program.get<std::string>("objective")));
   const auto restart_rate = std::stof(program.get<std::string>("restart_rate"));
@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
   // solve
   auto additional_info = std::string("");
   const auto deadline = Deadline(time_limit_sec * 1000);
-  const auto solution = solve(ins, additional_info, verbose - 1, &deadline, &MT,
+  const auto solution = solve(ins, additional_info, verbose - 1, &deadline, &TT,
                               objective, restart_rate);
   const auto comp_time_ms = deadline.elapsed_ms();
 

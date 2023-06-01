@@ -51,7 +51,7 @@ Instance::Instance(const std::string& scen_filename,
   }
 }
 
-Instance::Instance(const std::string& map_filename, std::mt19937* MT,
+Instance::Instance(const std::string& map_filename, std::mt19937* TT,
                    const uint _N)
     : G(Graph(map_filename)), starts(Config()), goals(Config()), N(_N)
 {
@@ -61,7 +61,7 @@ Instance::Instance(const std::string& map_filename, std::mt19937* MT,
   // set starts
   auto s_indexes = std::vector<uint>(V_size);
   std::iota(s_indexes.begin(), s_indexes.end(), 0);
-  std::shuffle(s_indexes.begin(), s_indexes.end(), *MT);
+  std::shuffle(s_indexes.begin(), s_indexes.end(), *TT);
   size_t i = 0;
   while (true) {
     if (i >= V_size) return;
@@ -73,7 +73,7 @@ Instance::Instance(const std::string& map_filename, std::mt19937* MT,
   // set goals
   auto g_indexes = std::vector<uint>(V_size);
   std::iota(g_indexes.begin(), g_indexes.end(), 0);
-  std::shuffle(g_indexes.begin(), g_indexes.end(), *MT);
+  std::shuffle(g_indexes.begin(), g_indexes.end(), *TT);
   size_t j = 0;
   while (true) {
     if (j >= V_size) return;

@@ -6,6 +6,7 @@
 #include "graph.hpp"
 #include "instance.hpp"
 #include "utils.hpp"
+#include "workaround.hpp"
 
 struct DistTable {
   const uint V_size;  // number of vertices

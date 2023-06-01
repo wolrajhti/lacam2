@@ -8,6 +8,7 @@
 #include "graph.hpp"
 #include "instance.hpp"
 #include "utils.hpp"
+#include "workaround.hpp"
 
 // objective function
 enum Objective { OBJ_NONE, OBJ_MAKESPAN, OBJ_SUM_OF_LOSS };
@@ -59,7 +60,7 @@ using HNodes = std::vector<HNode*>;
 struct Planner {
   const Instance* ins;
   const Deadline* deadline;
-  std::mt19937* MT;
+  std::mt19937* TT;
   const int verbose;
 
   // hyper parameters
@@ -79,7 +80,7 @@ struct Planner {
   Agents occupied_now;                          // for quick collision checking
   Agents occupied_next;                         // for quick collision checking
 
-  Planner(const Instance* _ins, const Deadline* _deadline, std::mt19937* _MT,
+  Planner(const Instance* _ins, const Deadline* _deadline, std::mt19937* _TT,
           const int _verbose = 0,
           // other parameters
           const Objective _objective = OBJ_NONE,

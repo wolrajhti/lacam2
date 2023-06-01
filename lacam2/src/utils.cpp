@@ -38,14 +38,14 @@ bool is_expired(const Deadline* deadline)
   return deadline->elapsed_ms() > deadline->time_limit_ms;
 }
 
-float get_random_float(std::mt19937* MT, float from, float to)
+float get_random_float(std::mt19937* TT, float from, float to)
 {
   std::uniform_real_distribution<float> r(from, to);
-  return r(*MT);
+  return r(*TT);
 }
 
-int get_random_int(std::mt19937* MT, int from, int to)
+int get_random_int(std::mt19937* TT, int from, int to)
 {
   std::uniform_int_distribution<int> r(from, to);
-  return r(*MT);
+  return r(*TT);
 }

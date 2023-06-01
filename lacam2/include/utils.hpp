@@ -46,5 +46,5 @@ double elapsed_ms(const Deadline* deadline);
 double elapsed_ns(const Deadline* deadline);
 bool is_expired(const Deadline* deadline);
 
-float get_random_float(std::mt19937* MT, float from = 0, float to = 1);
-int get_random_int(std::mt19937* MT, int from = 0, int to = 1);
+float get_random_float(std::mt19937* TT, float from = 0, float to = 1);
+int get_random_int(std::mt19937* TT, int from = 0, int to = 1);

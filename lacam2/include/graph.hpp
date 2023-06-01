@@ -3,6 +3,7 @@
  */
 #pragma once
 #include "utils.hpp"
+#include "workaround.hpp"
 
 struct Vertex {
   const uint id;     // index for V in Graph

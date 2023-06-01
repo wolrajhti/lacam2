@@ -6,6 +6,7 @@
 
 #include "graph.hpp"
 #include "utils.hpp"
+#include "workaround.hpp"
 
 struct Instance {
   const Graph G;
@@ -21,7 +22,7 @@ struct Instance {
   Instance(const std::string& scen_filename, const std::string& map_filename,
            const uint _N = 1);
   // random instance generation
-  Instance(const std::string& map_filename, std::mt19937* MT,
+  Instance(const std::string& map_filename, std::mt19937* TT,
            const uint _N = 1);
   ~Instance() {}
 

@@ -64,11 +64,11 @@ HNode::~HNode()
 }
 
 Planner::Planner(const Instance* _ins, const Deadline* _deadline,
-                 std::mt19937* _MT, const int _verbose,
+                 std::mt19937* _TT, const int _verbose,
                  const Objective _objective, const float _restart_rate)
     : ins(_ins),
       deadline(_deadline),
-      MT(_MT),
+      TT(_TT),
       verbose(_verbose),
       objective(_objective),
       RESTART_RATE(_restart_rate),
@@ -151,7 +151,7 @@ Solution Planner::solve(std::string& additional_info)
       // case found
       rewrite(H, iter->second, H_goal, OPEN);
       // re-insert or random-restart
-      auto H_insert = (MT != nullptr && get_random_float(MT) >= RESTART_RATE)
+      auto H_insert = (TT != nullptr && get_random_float(TT) >= RESTART_RATE)
                           ? iter->second
                           : H_init;
       if (H_goal == nullptr || H_insert->f < H_goal->f) OPEN.push(H_insert);
@@ -264,7 +264,7 @@ void Planner::expand_lowlevel_tree(HNode* H, LNode* L)
   auto C = H->C[i]->neighbor;
   C.push_back(H->C[i]);
   // randomize
-  if (MT != nullptr) std::shuffle(C.begin(), C.end(), *MT);
+  if (TT != nullptr) std::shuffle(C.begin(), C.end(), *TT);
   // insert
   for (auto v : C) H->search_tree.push(new LNode(L, i, v));
 }
@@ -322,8 +322,8 @@ bool Planner::funcPIBT(Agent* ai)
   for (auto k = 0; k < K; ++k) {
     auto u = ai->v_now->neighbor[k];
     C_next[i][k] = u;
-    if (MT != nullptr)
-      tie_breakers[u->id] = get_random_float(MT);  // set tie-breaker
+    if (TT != nullptr)
+      tie_breakers[u->id] = get_random_float(TT);  // set tie-breaker
   }
   C_next[i][K] = ai->v_now;
 

@@ -5,6 +5,7 @@
 #include "dist_table.hpp"
 #include "instance.hpp"
 #include "utils.hpp"
+#include "workaround.hpp"
 
 bool is_feasible_solution(const Instance& ins, const Solution& solution,
                           const int verbose = 0);
