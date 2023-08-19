@@ -23,13 +23,18 @@ class LNode {
   where: Vertices;
   depth: number;
   constructor(parent?: LNode, i = 0, v?: Vertex) { // who and where
-
+    if (parent) {
+      this.who = parent.who;
+      this.who.push(i);
+      this.where = parent.where;
+      this.where.push(v);
+    }
   }
 };
 
 // high-level node
 class HNode {
-  static HNODE_CNT: number;  // count #(high-level node)
+  static HNODE_CNT = 0;  // count #(high-level node)
 
   // tree
   neighbor: Set<HNode>;

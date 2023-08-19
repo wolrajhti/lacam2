@@ -5,7 +5,7 @@ import { Instance } from './instance';
 export class DistTable {
   readonly V_size: number;  // number of vertices
   readonly table: number[][]; // distance table, index: agent-id & vertex-id
-  readonly OPEN: Queue<Vertex>[]; // search queue
+  readonly OPEN: Queue<Vertex>[] = []; // search queue
   constructor(ins: Instance) {
     this.V_size = ins.G.V.length;
     this.table = [];
